@@ -14,7 +14,6 @@ app.use(cors());
 app.use(formidable());
 
 app.post("/form", (req, res) => {
-  console.log(req.fields);
   const data = {
     from: `${req.fields.firstname} ${req.fields.lastname} <${req.fields.email}>`,
     to: "lagreouemily@gmail.com",
@@ -22,7 +21,6 @@ app.post("/form", (req, res) => {
     text: `${req.fields.message}`,
   };
   mailgun.messages().send(data, (error, body) => {
-    console.log(body);
     if (error === undefined) {
       res.json({ message: "Mail sent", body: body });
     } else {
@@ -35,6 +33,6 @@ app.all("*", (req, res) => {
   res.json({ message: "Page not found" });
 });
 
-app.listen(4000, () => {
+app.listen(process.eventNames.PORT, () => {
   console.log("Server has started.");
 });
